@@ -5,7 +5,7 @@ from analyzer import analyze_personality, generate_recommendations
 
 # ページ設定
 st.set_page_config(
-    page_title="個性診断・ライフスタイル提案システム",
+    page_title="個性診断・ライフスタイル提案",
     page_icon="✨",
     layout="wide"
 )
@@ -77,7 +77,7 @@ def show_results():
     st.write(recommendations)
 
 def main():
-    st.title("✨ 個性診断・ライフスタイル提案システム")
+    st.title("✨ 個性診断・ライフスタイル提案")
     
     # 進捗バー
     progress = calculate_progress()
@@ -117,6 +117,12 @@ def main():
     
     # 回答を保存
     st.session_state.answers[current_question['id']] = answer
+    
+    # 前の質問に戻るボタン
+    if st.session_state.current_question_index > 0:
+        if st.button("前の質問に戻る"):
+            st.session_state.current_question_index -= 1
+            st.rerun()
     
     # 次の質問ボタン
     if st.button("次の質問へ"):
